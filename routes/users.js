@@ -3,6 +3,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+const verify = require('../middleware/verify');
+
 
 //-- models --//
 const User = require('../models/user');
@@ -71,6 +73,11 @@ router.post('/register', async (req, res) => {
         })
     }
 });
+
+//-- login --//
+router.post('/auth', verify, async (req, res) => {
+    res.send({ msg: "verified!" });
+})
 
 
 module.exports = router;
